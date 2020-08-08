@@ -1,4 +1,4 @@
-package softuni.springproject.web.controllers.base;
+package softuni.springproject.web.base;
 
 import softuni.springproject.services.models.LoginUserServiceModel;
 

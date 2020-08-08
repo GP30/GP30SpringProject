@@ -1,4 +1,4 @@
-package softuni.springproject.web.controllers;
+package softuni.springproject.web.view.controllers;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

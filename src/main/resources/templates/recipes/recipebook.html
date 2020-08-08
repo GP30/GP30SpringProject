@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <th:block th:include="~{_shared/head}"/>
+<link rel="stylesheet" href="/css/recipebook.css">
 <body>
 <th:block th:include="~{_shared/header}"/>
 <main class="container">
@@ -16,20 +16,16 @@
             <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>Tomato Soup</td>
-            <td>3</td>
-            <td>5</td>
-            <td>
-                <form action="/recipes/recipebook/TomatoSoup" method="post">
-                <button class="btn btn-info">Add</button>
-                </form>
-            </td>
-        </tr>
+        <tbody id="recipes-table">
         </tbody>
     </table>
 </main>
 <th:block th:include="~{_shared/footer}" />
+<th:block th:include="~{_shared/loader}" />
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+<script src="/js/recipes.js"></script>
 </body>
 </html>

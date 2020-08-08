@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import softuni.springproject.data.models.Gender;
 import org.modelmapper.Converter;
 import softuni.springproject.services.models.ChefCreateServiceModel;
-import softuni.springproject.web.models.ChefCreateModel;
+import softuni.springproject.web.view.models.ChefCreateModel;
 
 @Configuration
 public class ModelMapperConfig {

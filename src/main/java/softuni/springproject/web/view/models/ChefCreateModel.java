@@ -1,4 +1,4 @@
-package softuni.springproject.web.models;
+package softuni.springproject.web.view.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,9 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ChefRecipeViewModel {
+public class ChefCreateModel {
     private String name;
-    private int difficulty;
-    private int taste;
-
+    private String gender;
 }

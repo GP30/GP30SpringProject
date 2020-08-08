@@ -1,5 +1,6 @@
-package softuni.springproject.web.controllers;
+package softuni.springproject.web.view.controllers;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,27 +11,19 @@ import softuni.springproject.services.models.ChefDetailsServiceModel;
 import softuni.springproject.services.models.LoginUserServiceModel;
 import softuni.springproject.services.services.ChefsService;
 import softuni.springproject.services.services.UsersService;
-import softuni.springproject.web.controllers.base.BaseController;
-import softuni.springproject.web.models.ChefCreateModel;
-import softuni.springproject.web.models.ChefDetailsViewModel;
+import softuni.springproject.web.base.BaseController;
+import softuni.springproject.web.view.models.ChefCreateModel;
+import softuni.springproject.web.view.models.ChefDetailsViewModel;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chefs")
+@AllArgsConstructor
 public class ChefsController extends BaseController {
     private final ChefsService chefsService;
     private final ModelMapper mapper;
     private final UsersService usersService;
-
-    public ChefsController(
-            ChefsService chefsService,
-            ModelMapper mapper,
-            UsersService usersService) {
-        this.chefsService = chefsService;
-        this.mapper = mapper;
-        this.usersService = usersService;
-    }
 
     @GetMapping("/details/{name}")
     public ModelAndView getChefDetails(@PathVariable String name, ModelAndView modelAndView) {

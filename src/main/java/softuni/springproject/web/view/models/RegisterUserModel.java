@@ -1,4 +1,4 @@
-package softuni.springproject.web.models;
+package softuni.springproject.web.view.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

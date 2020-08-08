@@ -1,4 +1,4 @@
-package softuni.springproject.web.controllers;
+package softuni.springproject.web.view.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import softuni.springproject.data.repositories.ChefsRepository;
 import softuni.springproject.services.models.LoginUserServiceModel;
 import softuni.springproject.services.models.auth.RegisterUserServiceModel;
 import softuni.springproject.services.services.AuthService;
-import softuni.springproject.web.models.RegisterUserModel;
+import softuni.springproject.web.view.models.RegisterUserModel;
 import javax.validation.Valid;
 import java.util.Optional;
 
