@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header}"/>
+<main class="container">
+    <h1 class="text-center">Recipe Book</h1>
+    <hr class="hr-3"/>
+    <table class="table bg-blur">
+        <thead>
+        <tr>
+            <th scope="col" class="font-weight-bold">Name</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Taste</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Tomato Soup</td>
+            <td>3</td>
+            <td>5</td>
+            <td>
+                <form action="/recipes/recipebook/TomatoSoup" method="post">
+                <button class="btn btn-info">Add</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<th:block th:include="~{_shared/footer}" />
+</body>
+</html>

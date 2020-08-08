@@ -1,0 +1,24 @@
+body {
+    background-image: url('../img/cookingbg.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+textarea {
+    resize: none;
+}
+
+footer {
+    position:fixed;
+    bottom:0;
+    width: 100%;
+}
+
+.w-15 {
+    width: 15%;
+}
+
+.hwite{
+    color: white
+}
