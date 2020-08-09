@@ -1,14 +1,15 @@
-package softuni.springproject.services.services.implementations;
+package softuni.springproject.services.services.validation.base;
 
 import org.springframework.stereotype.Service;
 import softuni.springproject.data.repositories.UsersRepository;
 import softuni.springproject.services.models.auth.RegisterUserServiceModel;
-import softuni.springproject.services.services.AuthValidationService;
+import softuni.springproject.services.services.validation.AuthValidationService;
+
 
 @Service
 public class AuthValidationServiceImpl implements AuthValidationService {
-
     private final UsersRepository usersRepository;
+
 
     public AuthValidationServiceImpl(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
@@ -32,5 +33,4 @@ public class AuthValidationServiceImpl implements AuthValidationService {
     private boolean isEmailValid(String email) {
         return true;
     }
-
 }

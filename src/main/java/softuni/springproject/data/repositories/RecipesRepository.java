@@ -6,5 +6,4 @@ import softuni.springproject.data.models.Recipe;
 
 @Repository
 public interface RecipesRepository extends JpaRepository<Recipe, Long> {
-
 }

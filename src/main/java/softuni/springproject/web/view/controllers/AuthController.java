@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.repositories.ChefsRepository;
-import softuni.springproject.services.models.LoginUserServiceModel;
+import softuni.springproject.services.models.auth.LoginUserServiceModel;
 import softuni.springproject.services.models.auth.RegisterUserServiceModel;
 import softuni.springproject.services.services.AuthService;
 import softuni.springproject.web.view.models.RegisterUserModel;

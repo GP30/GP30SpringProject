@@ -16,10 +16,11 @@ const toString = ({ id, name, difficulty, taste, known }) => {
     <td>${name}</td>
     <td>${difficulty}</td>
     <td>${taste}</td>`
+
     columns += known
         ? '<td></td>'
         : `<td>
-            <form class="add-recipe-form" data-id=${id} action="/api/recipes/${id}" method="post">
+            <form class="add-recipe-form" data-id=${id} action="/api/recipes/add-to-user/${id}" method="post">
                 <button class="btn btn-info">Learn</button>
             </form>
            </td>`
@@ -48,6 +49,7 @@ $('#recipes-table').on('submit', '.add-recipe-form', function (ev) {
         .then(data => {
             console.log(data)
             loader.hide();
+            window.location = '/recipes/recipebook';
         });
 
     ev.preventDefault();

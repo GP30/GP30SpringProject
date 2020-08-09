@@ -1,4 +1,4 @@
-package softuni.springproject.services.models;
+package softuni.springproject.services.models.recipes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

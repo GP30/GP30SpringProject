@@ -11,7 +11,7 @@ import softuni.springproject.data.repositories.ChefsRepository;
 import softuni.springproject.data.repositories.UsersRepository;
 import softuni.springproject.services.factories.ChefsFactory;
 import softuni.springproject.services.factories.base.ChefsFactoryImpl;
-import softuni.springproject.services.models.ChefCreateServiceModel;
+import softuni.springproject.services.models.chefs.ChefCreateServiceModel;
 import softuni.springproject.services.services.ChefsService;
 
 import static org.junit.jupiter.api.Assertions.*;

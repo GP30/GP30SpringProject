@@ -1,4 +1,4 @@
-package softuni.springproject.services.models;
+package softuni.springproject.services.models.auth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

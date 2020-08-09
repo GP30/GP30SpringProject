@@ -4,11 +4,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.springproject.data.models.User;
 import softuni.springproject.data.repositories.UsersRepository;
-import softuni.springproject.services.models.LoginUserServiceModel;
+import softuni.springproject.services.models.auth.LoginUserServiceModel;
 import softuni.springproject.services.models.auth.RegisterUserServiceModel;
 import softuni.springproject.services.services.AuthService;
-import softuni.springproject.services.services.AuthValidationService;
 import softuni.springproject.services.services.HashingService;
+import softuni.springproject.services.services.validation.AuthValidationService;
 
 @Service
 public class AuthServiceImpl implements AuthService {

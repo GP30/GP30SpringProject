@@ -6,7 +6,7 @@ import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.models.User;
 import softuni.springproject.data.repositories.ChefsRepository;
 import softuni.springproject.data.repositories.UsersRepository;
-import softuni.springproject.services.models.ChefCreateServiceModel;
+import softuni.springproject.services.models.chefs.ChefCreateServiceModel;
 import softuni.springproject.services.services.ChefsService;
 import softuni.springproject.services.services.UsersService;
 
@@ -34,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
             throw new Exception("User already has a chef.");
         }
         Chef chef = chefsService.create(chefServiceModel);
-        user.setChef(chef);
-        usersRepository.saveAndFlush(user);
+        chef.setUser(user);
+        chefsRepository.saveAndFlush(chef);
     }
 }

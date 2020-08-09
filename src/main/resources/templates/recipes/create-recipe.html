@@ -7,7 +7,7 @@
 <main class="container">
     <h1 class="text-center">Create Recipe</h1>
     <hr class="hr-3"/>
-    <form class="mx-auto w-100 bg-blur" action="/recipes/create" method="post">
+    <form class="mx-auto w-100 bg-blur" th:action="@{/api/recipes}" method="post">
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2 text-white">Name</label>
@@ -16,45 +16,13 @@
         </div>
         <div class="form-group">
             <div class="row flex-md-row">
-                <div class="col col-sm-1"></div>
-                <div class="ml-lg-5">
-                    <img src="/img/weapon.jpg" class="border border-secondary" alt="weapon" width="110"
-                         height="100"/>
-                </div>
-                <div class="ml-lg-5">
-                    <img src="/img/helmet.jpg" class="border border-secondary" alt="helmet" width="110"
-                         height="100"/>
-                </div>
-            </div>
-            <div class="row flex-md-row">
-                <div class="col col-sm-2"></div>
-                <div class="list-inline">
-                    <div class="col col-md-6 ml-4">
-                        <h5 class="text-white">WEAPON</h5>
-                        <label>
-                            <input type="radio" class="ml-lg-5" value="WEAPON" name="slot">
-                        </label>
-                    </div>
-                </div>
-                <div class="list-inline">
-                    <div class="col col-md-6 ml-4">
-                        <h5 class="text-white">HELMET</h5>
-                        <label>
-                            <input type="radio" class="ml-lg-5" value="HELMET" name="slot">
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row flex-md-row">
                 <div class="col col-md-3">
-                    <label for="stamina" class="text-white">Stamina</label>
-                    <input type="number" id="stamina" class="w-25" name="stamina" placeholder="0" min="0" max="100">
+                    <label for="difficulty" class="text-white">Difficulty</label>
+                    <input type="number" id="difficulty" class="w-25" name="difficulty" placeholder="0" min="0" max="100">
                 </div>
                 <div class="col col-md-3">
-                    <label for="strength" class="text-white">Strength</label>
-                    <input type="number" id="strength" class="w-25" name="strength" placeholder="0" min="0" max="100">
+                    <label for="taste" class="text-white">Taste</label>
+                    <input type="number" id="taste" class="w-25" name="taste" placeholder="0" min="0" max="100">
                 </div>
             </div>
         </div>

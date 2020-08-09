@@ -6,11 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import softuni.springproject.services.models.recipes.RecipeCreateServiceModel;
 import softuni.springproject.services.services.RecipesService;
+import softuni.springproject.web.api.models.RecipeCreateRequestModel;
 import softuni.springproject.web.api.models.RecipeResponseModel;
 import softuni.springproject.web.base.BaseController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +33,19 @@ public class RecipesApiController extends BaseController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/api/recipes/{id}")
-    public void AddRecipe(@PathVariable long id, HttpSession session) {
+    @PostMapping("/api/recipes/add-to-user/{id}")
+    public void addRecipe(@PathVariable long id, HttpSession session, HttpServletResponse response) throws IOException {
         String username = getUsername(session);
-        recipesService.createForUserById(id, username);
+        recipesService.addToUserById(id, username);
+        String chefName = getChefName(session);
+        response.sendRedirect("/chefs/details/" + chefName);
+    }
+
+    @PostMapping("/api/recipes")
+    public void create(RecipeCreateRequestModel requestModel, HttpServletResponse response) throws IOException {
+        RecipeCreateServiceModel serviceModel = mapper.map(requestModel, RecipeCreateServiceModel.class);
+        recipesService.create(serviceModel);
+        response.sendRedirect("/recipes/recipebook");
     }
 
 }

@@ -1,16 +1,16 @@
-package softuni.springproject.services.models;
+package softuni.springproject.services.models.recipes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import softuni.springproject.data.models.Gender;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChefCreateServiceModel {
+public class RecipeCreateServiceModel {
     private String name;
-    private Gender gender;
+    private int difficulty;
+    private int taste;
 }

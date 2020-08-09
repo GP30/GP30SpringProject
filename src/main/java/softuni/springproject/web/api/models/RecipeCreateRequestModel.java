@@ -1,5 +1,6 @@
-package softuni.springproject.services.models;
+package softuni.springproject.web.api.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ChefRecipeServiceModel {
+@AllArgsConstructor
+public class RecipeCreateRequestModel {
     private String name;
     private int difficulty;
     private int taste;

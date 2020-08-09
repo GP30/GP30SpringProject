@@ -1,6 +1,8 @@
 <header>
     <nav class="navbar bg-dark navbar-expand-lg navbar-background bg-dark ">
-        <a class="navbar-brand text-white h4">Cookbook</a>
+
+        <a class="navbar-brand text-white h4" th:href="@{/home}">Cookbook</a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -36,7 +38,9 @@
                             <a class="nav-link text-white active h5" href="/users/profile">Profile</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link text-white active h5" href="/logout">Logout</a>
+                            <form th:action="@{/users/logout}" method="post">
+                                <button class="nav-link text-white active h5" type="submit">Logout</button>
+                            </form>
                         </li>
                     </th:block>
 
@@ -49,7 +53,9 @@
                             <a class="nav-link text-white active h5" href="/chefs/create">Create Chef</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link text-white active h5" href="/logout">Logout</a>
+                            <form th:action="@{/users/logout}" method="post">
+                                <button class="nav-link text-white active h5" type="submit">Logout</button>
+                            </form>
                         </li>
                     </th:block>
                 </th:block>

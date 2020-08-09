@@ -6,13 +6,27 @@
 <th:block th:include="~{_shared/header}"/>
 <main>
     <div class="text-center mb-3">
-        <h4 class="text-white mt-2">Welcome to the cookbook, user</h4>
+        <h4 class="text-white mt-2">Welcome to the cookbook, [[${session.username}]]</h4>
     </div>
     <hr class="my-3"/>
     <div class="container">
         <div class="text-center">
-            <h2>User, you don't have a chef. Click below and create one.</h2>
-            <a href="/chefs/create" class="btn btn-secondary">Create chef</a>
+            <th:block th:if="${session.user.chefName == null}">
+                <h2>User, you don't have a chef. Click below and create one.</h2>
+                <a href="/chefs/create" class="btn btn-secondary">Create chef</a>
+            </th:block>
+            <th:block th:unless="${session.user.chefName == null}">
+                <h2>User, already have a chef</h2>
+            </th:block>
+            <th:block th:if="${chefs}">
+                <div class="row flex-md-row" th:each="chef : ${chefs}">
+                    <div class="col text-center">
+                        <img th:src="@{'/img/' +${chef.gender} + '.jpg'}" width="150">
+                        <h2 class="text-white" th:text="${chef.name}"></h2>
+                        <h2 class="text-white" th:text="${chef.skill}"></h2>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </div>
 </main>

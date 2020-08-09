@@ -7,10 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ChefRecipeViewModel {
+public class ChefHomeModel {
     private String name;
-    private int difficulty;
-    private int taste;
-
-
+    private String gender;
+    private int skill;
 }
