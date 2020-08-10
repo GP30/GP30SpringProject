@@ -1,36 +1,31 @@
-package softuni.springproject.services.services.implementations;
+package softuni.springproject.services.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import softuni.springproject.base.TestBase;
 import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.repositories.ChefsRepository;
 import softuni.springproject.errors.ChefNotFoundException;
 import softuni.springproject.services.factories.ChefsFactory;
 import softuni.springproject.services.factories.base.ChefsFactoryImpl;
 import softuni.springproject.services.models.chefs.ChefDetailsServiceModel;
+import softuni.springproject.services.services.implementations.ChefsServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ChefsServiceImplTest {
+class ChefsServiceTest extends TestBase {
+    @MockBean
     ChefsRepository chefsRepository;
-    ChefsFactory chefsFactory;
-    ModelMapper mapper;
 
-    ChefsServiceImpl service;
-
-    @BeforeEach
-    void setupTest() {
-        chefsRepository = Mockito.mock(ChefsRepository.class);
-        chefsFactory = new ChefsFactoryImpl();
-        mapper = new ModelMapper();
-
-        service = new ChefsServiceImpl(chefsRepository, chefsFactory, mapper);
-    }
+    @Autowired
+    ChefsService service;
 
     @Test
     void getByName_whenChefDoesNotExist_shouldThrowChefNotFoundException() {

@@ -1,25 +1,21 @@
-package softuni.springproject.services.factories.base;
+package softuni.springproject.services.factories;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.models.Gender;
+import softuni.springproject.services.base.ServiceTestBase;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softuni.springproject.services.factories.ChefsConstants.*;
 
-class ChefsFactoryImplTest {
-
-    ChefsFactoryImpl factory;
-
-    @BeforeEach
-    void setupTest() {
-        factory = new ChefsFactoryImpl();
-    }
+class ChefsFactoryTest extends ServiceTestBase {
+    @Autowired
+    ChefsFactory factory;
 
     @Test
     void create_withNameAndGender_shouldReturnChefWithDefaultProps() {
-        String name = "Gotvach";
+        String name = "Chef";
         Gender gender = Gender.MALE;
 
         Chef chef = factory.create(name, gender);

@@ -1,9 +1,12 @@
-package softuni.springproject.services.services.implementations;
+package softuni.springproject.services.services;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import softuni.springproject.base.TestBase;
 import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.models.Gender;
 import softuni.springproject.data.models.User;
@@ -13,26 +16,18 @@ import softuni.springproject.services.factories.ChefsFactory;
 import softuni.springproject.services.factories.base.ChefsFactoryImpl;
 import softuni.springproject.services.models.chefs.ChefCreateServiceModel;
 import softuni.springproject.services.services.ChefsService;
+import softuni.springproject.services.services.implementations.ChefsServiceImpl;
+import softuni.springproject.services.services.implementations.UsersServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UsersServiceImplTest {
-    ChefsService chefsService;
+class UsersServiceTest extends TestBase {
+    @MockBean
     UsersRepository usersRepository;
-    ChefsRepository chefsRepository;
-    ChefsFactory chefsFactory;
 
-    UsersServiceImpl service;
 
-    @BeforeEach
-    public void setupTest() {
-        usersRepository = Mockito.mock(UsersRepository.class);
-        chefsRepository = Mockito.mock(ChefsRepository.class);
-        chefsFactory = new ChefsFactoryImpl();
-        ModelMapper mapper = new ModelMapper();
-        chefsService = new ChefsServiceImpl(chefsRepository, chefsFactory, mapper);
-        service = new UsersServiceImpl(chefsService, usersRepository, mapper, chefsRepository);
-    }
+    @Autowired
+    UsersService service;
 
     @Test
     public void createChefForUser_whenUserExistsAndDoesNotHaveAChef_shouldCreateChefForUser() throws Exception {

@@ -35,6 +35,6 @@ public class UsersServiceImpl implements UsersService {
         }
         Chef chef = chefsService.create(chefServiceModel);
         chef.setUser(user);
-        chefsRepository.saveAndFlush(chef);
+        chefsRepository.save(chef);
     }
 }

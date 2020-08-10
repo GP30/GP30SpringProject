@@ -2,6 +2,7 @@ package softuni.springproject.web.api.controllers;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import softuni.springproject.services.services.RecipesService;
 import softuni.springproject.web.api.models.RecipeCreateRequestModel;
 import softuni.springproject.web.api.models.RecipeResponseModel;
 import softuni.springproject.web.base.BaseController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,9 +28,18 @@ public class RecipesApiController extends BaseController {
     private final ModelMapper mapper;
 
     @GetMapping(value = "/api/recipes")
-    public List<RecipeResponseModel> getRecipes(HttpSession session) throws InterruptedException {
+    public ResponseEntity<List<RecipeResponseModel>> getRecipes(HttpSession session) {
         String username = getUsername(session);
-        return recipesService.getRecipesForUser(username)
+        List<RecipeResponseModel> result = recipesService.getRecipesForUser(username)
+                .stream()
+                .map(recipe -> mapper.map(recipe, RecipeResponseModel.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/api/recipes-all")
+    public List<RecipeResponseModel> getRecipes() throws InterruptedException {
+        return recipesService.getAll()
                 .stream()
                 .map(recipe -> mapper.map(recipe, RecipeResponseModel.class))
                 .collect(Collectors.toList());
@@ -42,10 +54,12 @@ public class RecipesApiController extends BaseController {
     }
 
     @PostMapping("/api/recipes")
-    public void create(RecipeCreateRequestModel requestModel, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Void> create(RecipeCreateRequestModel requestModel) {
         RecipeCreateServiceModel serviceModel = mapper.map(requestModel, RecipeCreateServiceModel.class);
         recipesService.create(serviceModel);
-        response.sendRedirect("/recipes/recipebook");
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "/recipes/recipebook");
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 
 }

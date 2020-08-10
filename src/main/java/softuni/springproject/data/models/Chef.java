@@ -28,7 +28,7 @@ public class Chef extends BaseEntity {
     @Column
     private int reputation;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "chef_recipes",
             joinColumns = {@JoinColumn(name = "chef_id")},

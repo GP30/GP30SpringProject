@@ -83,4 +83,12 @@ public class RecipesServiceImpl implements RecipesService {
         Recipe recipe = mapper.map(serviceModel, Recipe.class);
         recipesRepository.save(recipe);
     }
+
+    @Override
+    public List<RecipeServiceModel> getAll() {
+        return recipesRepository.findAll()
+                .stream()
+                .map(recipe -> mapper.map(recipe, RecipeServiceModel.class))
+                .collect(Collectors.toList());
+    }
 }
