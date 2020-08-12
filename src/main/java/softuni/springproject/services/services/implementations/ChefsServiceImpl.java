@@ -25,7 +25,7 @@ public class ChefsServiceImpl implements ChefsService {
     @Override
     public ChefDetailsServiceModel getByName(String name) {
         Optional<Chef> chefResult = chefsRepository.getByNameIgnoreCase(name);
-        if(chefResult.isEmpty()) {
+        if (chefResult.isEmpty()) {
             throw new ChefNotFoundException("Chef with such a name does not exist");
         }
 
@@ -40,6 +40,30 @@ public class ChefsServiceImpl implements ChefsService {
     public Chef create(ChefCreateServiceModel serviceModel) {
         Chef chef = chefsFactory.create(serviceModel.getName(), serviceModel.getGender());
         chefsRepository.save(chef);
+        return chef;
+    }
+
+    @Override
+    public ChefDetailsServiceModel getByUsername(String username) {
+        Optional<Chef> chef = chefsRepository.getByUserUsername(username);
+        if (chef.isEmpty()) {
+            throw new ChefNotFoundException("No such chef");
+        }
+
+        return mapper.map(chef.get(), ChefDetailsServiceModel.class);
+    }
+
+    @Override
+    public void repUpChefs() {
+        List<Chef> chefs = chefsRepository.findAll()
+                .stream()
+                .map(this::repUpChef)
+                .collect(Collectors.toList());
+        chefsRepository.saveAll(chefs);
+    }
+
+    private Chef repUpChef(Chef chef) {
+        chef.setReputation(chef.getReputation() + 1);
         return chef;
     }
 

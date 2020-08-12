@@ -4,10 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import softuni.springproject.data.models.Chef;
 import softuni.springproject.data.repositories.ChefsRepository;
 import softuni.springproject.services.models.auth.LoginUserServiceModel;
@@ -20,26 +17,24 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/users")
 public class AuthController {
 
     private final AuthService authService;
     private final ModelMapper mapper;
-    private final ChefsRepository chefsRepository;
 
     public AuthController(
             AuthService authService,
-            ModelMapper mapper,
-            ChefsRepository chefsRepository) {
+            ModelMapper mapper) {
         this.authService = authService;
         this.mapper = mapper;
-        this.chefsRepository = chefsRepository;
     }
 
     @GetMapping("/login")
-    public String getLogInForm() {
+    public String getLoginForm(@RequestParam(required = false) String error, Model model) {
+        if(error != null) {
+            model.addAttribute("error", error);
+        }
         return "auth/login.html";
-
     }
 
     @GetMapping("/register")
@@ -59,20 +54,19 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @PostMapping("login")
-    public String login(@ModelAttribute RegisterUserModel model, HttpSession session) {
-        RegisterUserServiceModel serviceModel = mapper.map(model, RegisterUserServiceModel.class);
-        try{
-            LoginUserServiceModel loginUserServiceModel = authService.login(serviceModel);
-            Optional<Chef> chef = chefsRepository
-                    .getByUserUsername(loginUserServiceModel.getUsername());
-            chef.ifPresent(value -> loginUserServiceModel.setChefName(value.getName()));
-            session.setAttribute("user", loginUserServiceModel);
-            return "redirect:/home";
-        } catch (Exception ex){
-            return "redirect:/users/login";
-        }
-
-    }
+//    @PostMapping("login")
+//    public String login(@ModelAttribute RegisterUserModel model, HttpSession session) {
+//        RegisterUserServiceModel serviceModel = mapper.map(model, RegisterUserServiceModel.class);
+//        try{
+//            LoginUserServiceModel loginUserServiceModel = authService.login(serviceModel);
+//            Optional<Chef> chef = chefsRepository
+//                    .getByUserUsername(loginUserServiceModel.getUsername());
+//            chef.ifPresent(value -> loginUserServiceModel.setChefName(value.getName()));
+//            session.setAttribute("user", loginUserServiceModel);
+//            return "redirect:/home";
+//        } catch (Exception ex){
+//            return "redirect:/users/login";
+//        }
+//    }
 
 }

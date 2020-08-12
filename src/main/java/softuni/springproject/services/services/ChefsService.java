@@ -10,4 +10,6 @@ public interface ChefsService {
     ChefDetailsServiceModel getByName(String name);
     Chef create(ChefCreateServiceModel serviceModel);
     List<ChefDetailsServiceModel> getAllChefs();
+    ChefDetailsServiceModel getByUsername(String username);
+    void repUpChefs();
 }

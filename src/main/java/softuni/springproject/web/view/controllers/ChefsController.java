@@ -17,6 +17,7 @@ import softuni.springproject.web.view.models.ChefCreateModel;
 import softuni.springproject.web.view.models.ChefDetailsViewModel;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/chefs")
@@ -39,26 +40,17 @@ public class ChefsController extends BaseController {
 
     @GetMapping("/create")
     public String getCreateChefForm(HttpSession session) {
-        if(!isAuthenticated(session)) {
-            return "redirect:/users/login";
-        }
         return "chefs/create-chef.html";
 
     }
 
     @PostMapping("/create")
-    public String createChef(@ModelAttribute ChefCreateModel chef, HttpSession session) {
-        if(!isAuthenticated(session)) {
-            return "/";
-        }
-
-        String username = getUsername(session);
+    public String createChef(@ModelAttribute ChefCreateModel chef, Principal principal) {
+        String username = principal.getName();
 
         ChefCreateServiceModel serviceModel = mapper.map(chef, ChefCreateServiceModel.class);
         try {
             usersService.createChefForUser(username, serviceModel);
-            LoginUserServiceModel loginUserServiceModel = new LoginUserServiceModel(username, chef.getName());
-            session.setAttribute("user", loginUserServiceModel);
             return "redirect:/chefs/details/" + chef.getName();
         } catch (Exception ex) {
             return "redirect:/chefs/create";

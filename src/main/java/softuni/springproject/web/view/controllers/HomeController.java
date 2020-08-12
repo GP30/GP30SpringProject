@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import softuni.springproject.services.services.AuthenticatedUserService;
 import softuni.springproject.services.services.ChefsService;
 import softuni.springproject.web.base.BaseController;
 import softuni.springproject.web.view.models.ChefHomeModel;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 public class HomeController extends BaseController {
     private final ChefsService chefsService;
     private final ModelMapper modelMapper;
-
+    private final AuthenticatedUserService authenticatedUserService;
 
     @GetMapping("/")
     public String getIndex(HttpSession session) {
@@ -26,14 +27,19 @@ public class HomeController extends BaseController {
     }
 
     @GetMapping("/home")
-    public ModelAndView getHome(ModelAndView modelAndView, HttpSession session) {
+    public ModelAndView getHome(ModelAndView modelAndView) {
+
+        List<String> authorities = authenticatedUserService.getRoles();
+
         modelAndView.setViewName("home/home");
+
         List<ChefHomeModel> chefs = chefsService
                 .getAllChefs()
                 .stream()
                 .map(chef -> modelMapper.map(chef, ChefHomeModel.class))
                 .collect(Collectors.toList());
         modelAndView.addObject("chefs", chefs);
+
         return modelAndView;
     }
 
