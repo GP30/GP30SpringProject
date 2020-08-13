@@ -1,5 +1,6 @@
 package softuni.springproject.web.filters;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.springproject.errors.ChefNotFoundException;
@@ -10,6 +11,7 @@ import softuni.springproject.services.services.ChefsService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component
 public class UserChefInterceptor implements HandlerInterceptor {
     private final AuthenticatedUserService authenticatedUserService;
     private final ChefsService chefsService;

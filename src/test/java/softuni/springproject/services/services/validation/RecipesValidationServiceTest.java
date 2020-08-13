@@ -26,6 +26,13 @@ class RecipesValidationServiceTest extends TestBase {
     }
 
     @Test
+    void isValid_whenTasteIsNegative_shouldReturnFalse() {
+        RecipeCreateServiceModel serviceModel = new RecipeCreateServiceModel("Valid name", 1, -2);
+        boolean isValid = service.isValid(serviceModel);
+        assertFalse(isValid);
+    }
+
+    @Test
     void isValid_whenRecipeIsValid_shouldReturnTrue() {
         RecipeCreateServiceModel serviceModel = new RecipeCreateServiceModel("Valid name", 1, 2);
         boolean isValid = service.isValid(serviceModel);

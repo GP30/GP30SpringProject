@@ -35,19 +35,16 @@ public class ChefsController extends BaseController {
         modelAndView.addObject("chef", viewModel);
         modelAndView.setViewName(CHEFS_CHEF_DETAILS_VIEW_NAME);
         return modelAndView;
-
     }
 
     @GetMapping("/create")
     public String getCreateChefForm(HttpSession session) {
         return "chefs/create-chef.html";
-
     }
 
     @PostMapping("/create")
     public String createChef(@ModelAttribute ChefCreateModel chef, Principal principal) {
         String username = principal.getName();
-
         ChefCreateServiceModel serviceModel = mapper.map(chef, ChefCreateServiceModel.class);
         try {
             usersService.createChefForUser(username, serviceModel);

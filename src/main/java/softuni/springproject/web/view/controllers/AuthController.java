@@ -14,13 +14,16 @@ import softuni.springproject.web.view.models.RegisterUserModel;
 import javax.validation.Valid;
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 public class AuthController {
 
     private final AuthService authService;
     private final ModelMapper mapper;
+
+    @ModelAttribute("registerUserModel")
+    public RegisterUserModel registerUserModel() {
+        return new RegisterUserModel();
+    }
 
     public AuthController(
             AuthService authService,
@@ -38,18 +41,17 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String getRegisterForm(Model model) {
-        model.addAttribute("model", new RegisterUserModel());
+    public String getRegisterForm(@ModelAttribute("registerUserModel") RegisterUserModel registerUserModel) {
         return "auth/register.html";
     }
 
 
-    @PostMapping("register")
-    public String register(@Valid @ModelAttribute RegisterUserModel model, BindingResult bindingResult) {
+    @PostMapping("/register")
+    public String register(@Valid @ModelAttribute("registerUserModel") RegisterUserModel registerUserModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "auth/register.html";
         }
-        RegisterUserServiceModel serviceModel = mapper.map(model, RegisterUserServiceModel.class);
+        RegisterUserServiceModel serviceModel = mapper.map(registerUserModel, RegisterUserServiceModel.class);
         authService.register(serviceModel);
         return "redirect:/";
     }

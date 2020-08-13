@@ -7,18 +7,16 @@
 <main>
     <div class="container">
         <div class="text-center bg-blur">
-            <h1>Chef</h1>
+            <h1>Your Chef</h1>
+            <hr class="my-1"/>
             <div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <h3 class="align-middle" th:text="${chef.name}"></h3>
-                    </div>
-                    <div class="col-md-2">
-                        <h3 class="align-middle" th:text="${chef.skill}"></h3>
+                    <div class="col">
+                        <h3 class="align-middle">Name - [[${chef.name}]]</h3>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col">
                         <th:block th:switch="${chef.gender.name()}">
                             <img th:case="'MALE'" src="/img/male.jpg" alt="photo"
                                  class="align-middle" height="175"
@@ -28,8 +26,15 @@
                                  width="150"/>
                         </th:block>
                     </div>
-                    <div class="col-md-2">
-                        <p class="align-content-center">Reputation - [[${chef.reputation}]]</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3 class="">Skill - [[${chef.skill}]]</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h3 class="">Reputation - [[${chef.reputation}]]</h3>
                     </div>
                 </div>
             </div>

@@ -15,6 +15,10 @@ footer {
     width: 100%;
 }
 
+body{
+    margin-bottom: 100px;
+}
+
 .w-15 {
     width: 15%;
 }

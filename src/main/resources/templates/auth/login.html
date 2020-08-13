@@ -5,7 +5,8 @@
 <body>
 <th:block th:include="~{_shared/header}"/>
 <main>
-    <h1 class="text-center">Login</h1>
+    <div class="container bg-blur">
+    <h1 class="text-center text-light">Login</h1>
     <hr class="hr-3"/>
     <form class="mx-auto w-15" th:action="@{/login}" method="post">
         <div class="form-group">
@@ -24,6 +25,7 @@
             <button class="btn btn-info text-white mb-3" type="submit">Login</button>
         </div>
     </form>
+    </div>
 </main>
 <th:block th:include="~{_shared/footer}" />
 </body>

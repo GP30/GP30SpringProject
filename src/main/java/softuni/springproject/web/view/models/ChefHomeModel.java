@@ -11,4 +11,5 @@ public class ChefHomeModel {
     private String name;
     private String gender;
     private int skill;
+    private int reputation;
 }

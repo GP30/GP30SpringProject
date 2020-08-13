@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,8 @@ public class RecipesApiController extends BaseController {
     private final ModelMapper mapper;
 
     @GetMapping(value = "/api/recipes")
-    public ResponseEntity<List<RecipeResponseModel>> getRecipes(HttpSession session) {
-        String username = getUsername(session);
+    public ResponseEntity<List<RecipeResponseModel>> getRecipes(Principal principal) {
+        String username = principal.getName();
         List<RecipeResponseModel> result = recipesService.getRecipesForUser(username)
                 .stream()
                 .map(recipe -> mapper.map(recipe, RecipeResponseModel.class))
@@ -46,8 +47,8 @@ public class RecipesApiController extends BaseController {
     }
 
     @PostMapping("/api/recipes/add-to-user/{id}")
-    public void addRecipe(@PathVariable long id, HttpSession session, HttpServletResponse response) throws IOException {
-        String username = getUsername(session);
+    public void addRecipe(@PathVariable long id, Principal principal , HttpSession session, HttpServletResponse response) throws IOException {
+        String username = principal.getName();
         recipesService.addToUserById(id, username);
         String chefName = getChefName(session);
         response.sendRedirect("/chefs/details/" + chefName);
