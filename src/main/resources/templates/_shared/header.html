@@ -1,5 +1,6 @@
 <header>
-    <nav class="navbar bg-success navbar-expand navbar-background bg-dark ">
+
+    <nav class="navbar bg-success navbar-expand-md navbar-background">
 
         <th:block th:if="${session.username == null}">
             <a class="navbar-brand text-white h4" href="/">Cookbook</a>
@@ -13,6 +14,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
                 <th:block th:if="${session.username == null}">
@@ -42,7 +44,7 @@
                         </li>
                         <li class="nav-item mr-2">
                             <form th:action="@{/logout}" method="post">
-                                <button class="nav-link text-white active h5" type="submit">Logout</button>
+                                <button class="nav-link active h5" type="submit">Logout</button>
                             </form>
                         </li>
                     </th:block>
@@ -64,5 +66,7 @@
                 </th:block>
             </ul>
         </div>
+
     </nav>
+
 </header>

@@ -3,6 +3,7 @@ package softuni.springproject.web.filters;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import softuni.springproject.errors.ChefNotFoundException;
 import softuni.springproject.services.models.chefs.ChefDetailsServiceModel;
 import softuni.springproject.services.services.AuthenticatedUserService;
@@ -11,8 +12,7 @@ import softuni.springproject.services.services.ChefsService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
-public class UserChefInterceptor implements HandlerInterceptor {
+public class UserChefInterceptor extends HandlerInterceptorAdapter {
     private final AuthenticatedUserService authenticatedUserService;
     private final ChefsService chefsService;
 

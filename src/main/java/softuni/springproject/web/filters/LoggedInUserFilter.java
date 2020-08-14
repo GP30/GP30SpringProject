@@ -26,7 +26,6 @@ public class LoggedInUserFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-
         HttpSession session = ((HttpServletRequest)servletRequest).getSession();
         session.setAttribute("username", username);
         filterChain.doFilter(servletRequest, servletResponse);

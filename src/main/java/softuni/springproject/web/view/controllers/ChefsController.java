@@ -43,11 +43,12 @@ public class ChefsController extends BaseController {
     }
 
     @PostMapping("/create")
-    public String createChef(@ModelAttribute ChefCreateModel chef, Principal principal) {
+    public String createChef(@ModelAttribute ChefCreateModel chef, Principal principal, HttpSession session) {
         String username = principal.getName();
         ChefCreateServiceModel serviceModel = mapper.map(chef, ChefCreateServiceModel.class);
         try {
             usersService.createChefForUser(username, serviceModel);
+            session.setAttribute("chefName", chef.getName());
             return "redirect:/chefs/details/" + chef.getName();
         } catch (Exception ex) {
             return "redirect:/chefs/create";

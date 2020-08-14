@@ -38,7 +38,6 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
         } catch (ChefNotFoundException ex) {
             // do nothing
         }
-
         redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
     }
 }

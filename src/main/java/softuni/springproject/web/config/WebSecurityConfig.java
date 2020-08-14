@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import softuni.springproject.services.services.UsersService;
+import softuni.springproject.web.filters.UserChefInterceptor;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/users/all-users").hasAnyAuthority("ROOT","ADMIN")
                 .antMatchers("/")
                 .permitAll()
                 .antMatchers("/favicon.ico", "/js/*", "/css/*", "/img/*")
@@ -51,6 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .successForwardUrl("/")
                 .successHandler(authenticationSuccessHandler)
+                .and()
+                .exceptionHandling().accessDeniedPage("/unauthorized")
                 .and()
                 .logout()
                 .permitAll();

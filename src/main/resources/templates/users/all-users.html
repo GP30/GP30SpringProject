@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:include="~{_shared/head}"/>
+<body>
+<th:block th:include="~{_shared/header}"/>
+<main class="container">
+    <h1 class="text-center">Users List</h1>
+    <hr class="hr-3"/>
+    <table style="color:white" class="table bg-blur">
+        <thead>
+        <tr>
+            <th scope="col" class="font-weight-bold">Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Action</th>
+        </tr>
+
+        </thead>
+        <tbody id="users-table">
+        <tr th:each="admin : ${admin_users}">
+            <td th:text="${admin.username}"></td>
+            <td th:text="${admin.authorities}"></td>
+            <td>
+                <form method="POST" th:action="@{/users/demote(user=${admin})}">
+                    <button type="submit" sec:authorize="hasAnyAuthority('ROOT')">Demote</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:each="simple_user : ${user_users}">
+            <td th:text="${simple_user.username}"></td>
+            <td th:text="${simple_user.authorities}"></td>
+            <td>
+                <form method="POST" th:action="@{/users/promote(user=${simple_user})}">
+                    <button type="submit" sec:authorize="hasAnyAuthority('ROOT')">Promote</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+<th:block th:include="~{_shared/footer}"/>
+</body>
+</html>

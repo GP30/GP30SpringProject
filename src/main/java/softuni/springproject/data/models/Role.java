@@ -21,6 +21,6 @@ import java.util.Set;
 public class Role extends BaseEntity implements GrantedAuthority {
     private String authority;
 
-    @ManyToMany(mappedBy = "authorities")
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 }
