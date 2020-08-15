@@ -2,12 +2,10 @@ package softuni.springproject.web.view.controllers;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.springproject.data.models.User;
 import softuni.springproject.services.models.chefs.ChefDetailsServiceModel;
@@ -36,6 +34,7 @@ public class UsersController {
     }
 
     @GetMapping("/all-users")
+    @PreAuthorize("hasAnyAuthority('ROOT','ADMIN')")
     public String getAllUsers(Model model) {
         List<User> adminUsers = usersService.getAllAdminUsers();
         List<User> userUsers = usersService.getAllUserUsers();
@@ -44,16 +43,16 @@ public class UsersController {
         return "users/all-users.html";
     }
 
-    @PutMapping(value = "/demote")
-    public String demoteAdminToUser(@RequestParam User user) {
-        usersService.demoteAdminToUser(user);
-        return "users/all-users.html";
+    @RequestMapping("/demote/{id}")
+    public String demoteAdminToUser(@PathVariable("id") long id) {
+        usersService.demoteAdminToUserById(id);
+        return "redirect:/users/all-users";
     }
 
-    @PutMapping("/promote")
-    public String promoteUserToAdmin(@RequestParam User user) {
-        usersService.promoteUserToAdmin(user);
-        return "users/all-users.html";
+    @RequestMapping("/promote/{id}")
+    public String promoteUserToAdmin(@PathVariable("id") long id) {
+        usersService.promoteUserToAdminById(id);
+        return "redirect:/users/all-users";
     }
 
 }

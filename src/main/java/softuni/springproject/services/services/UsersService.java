@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface UsersService extends UserDetailsService {
     void createChefForUser(String username, ChefCreateServiceModel chef) throws Exception;
+
     List<User> getAllUsers();
 
     List<User> getAllUsersByRole(Role role);
@@ -17,7 +18,9 @@ public interface UsersService extends UserDetailsService {
 
     List<User> getAllAdminUsers();
 
-    void demoteAdminToUser(User user);
+    public void changeRoleIDtoUserId(long userId, long roleId);
 
-    void promoteUserToAdmin(User user);
+    void demoteAdminToUserById(long id);
+
+    void promoteUserToAdminById(long id);
 }

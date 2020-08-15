@@ -25,5 +25,4 @@ class ChefsFactoryTest extends ServiceTestBase {
         assertEquals(INITIAL_SKILL, chef.getSkill());
         assertEquals(INITIAL_REPUTATION, chef.getReputation());
     }
-
 }

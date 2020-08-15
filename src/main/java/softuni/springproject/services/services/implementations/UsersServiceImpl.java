@@ -59,30 +59,36 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public List<User> getAllUsersByRole(Role role) {
-        return usersRepository.findUsersByRolesContains(role);
+        return usersRepository.findUsersByAuthoritiesContains(role);
     }
 
     @Override
     public List<User> getAllUserUsers() {
-        return usersRepository.findUsersByRolesContains(rolesRepository.findDistinctByAuthority("USER"));
+        return usersRepository.findUsersByAuthoritiesContains(rolesRepository.findDistinctByAuthority("USER"));
     }
 
     @Override
     public List<User> getAllAdminUsers() {
-        return usersRepository.findUsersByRolesContains(rolesRepository.findDistinctByAuthority("ADMIN"));
+        return usersRepository.findUsersByAuthoritiesContains(rolesRepository.findDistinctByAuthority("ADMIN"));
     }
 
     @Override
-    public void demoteAdminToUser(User user) {
+    public void changeRoleIDtoUserId(long userId, long roleId) {
         Set<Role> roles = new HashSet<>();
-        roles.add(rolesRepository.findDistinctByAuthority("USER"));
-        user.setRoles(roles);
+        roles.add(rolesRepository.findById(roleId));
+        User user = usersRepository.findById(userId);
+        user.getAuthorities().clear();
+        user.setAuthorities(roles);
+        usersRepository.save(user);
     }
 
     @Override
-    public void promoteUserToAdmin(User user) {
-        Set<Role> roles = new HashSet<>();
-        roles.add(rolesRepository.findDistinctByAuthority("ADMIN"));
-        user.setRoles(roles);
+    public void demoteAdminToUserById(long userId) {
+        changeRoleIDtoUserId(userId, 1);
+    }
+
+    @Override
+    public void promoteUserToAdminById(long userId) {
+        changeRoleIDtoUserId(userId, 2);
     }
 }

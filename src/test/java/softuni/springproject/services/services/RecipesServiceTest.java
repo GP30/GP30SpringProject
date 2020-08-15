@@ -42,7 +42,6 @@ class RecipesServiceTest extends TestBase {
     @Override
     protected void beforeEach() {
         recipes = new ArrayList<>();
-
         Mockito.when(recipesRepository.findAll())
                 .thenReturn(recipes);
     }
@@ -110,7 +109,6 @@ class RecipesServiceTest extends TestBase {
         assertThrows(
                 NullPointerException.class,
                 () -> service.addToUserById(1, username));
-
     }
 
     @Test
@@ -178,8 +176,6 @@ class RecipesServiceTest extends TestBase {
         Recipe recipe = argument.getValue();
         assertNotNull(recipe);
     }
-
-
 
     private RecipeCreateServiceModel getRecipeCreateModel() {
         return new RecipeCreateServiceModel("Recipe 1", 1, 2);

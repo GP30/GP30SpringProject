@@ -7,4 +7,5 @@ import softuni.springproject.data.models.Role;
 @Repository
 public interface RolesRepository extends JpaRepository<Role, Long> {
     Role findDistinctByAuthority(String authority);
+    Role findById(long id);
 }

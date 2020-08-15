@@ -23,7 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 class ChefsControllerTest extends ViewTestBase {
     @MockBean
     ChefsRepository chefsRepository;
@@ -52,7 +51,7 @@ class ChefsControllerTest extends ViewTestBase {
         String chefName = "pesho";
         mockMvc.perform(get("/chefs/details/" + chefName))
                 .andExpect(status().isNotFound())
-                .andExpect(view().name("error"));
+                .andExpect(view().name("custom-error"));
     }
 
     //
@@ -67,19 +66,18 @@ class ChefsControllerTest extends ViewTestBase {
     }
 
     @Test
-    @WithMockUser(username = "user1", password = "pwd")
+    @WithMockUser(username = "user1", password = "pwd", authorities = "USER")
     void getChefsDetailsForm() throws Exception {
         mockMvc.perform(get("/chefs/create"))
-                .andExpect(status().is(302))
-                .andExpect(redirectedUrl("/users/login"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("chefs/create-chef.html"));
     }
 
     @Test
-    @WithMockUser(username = "user1", password = "pwd")
     void createChefWhenUserNotAuthenticated() throws Exception {
         mockMvc.perform(post("/chefs/create"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"));
+                .andExpect(redirectedUrl("http://localhost/login"));
     }
 
 }

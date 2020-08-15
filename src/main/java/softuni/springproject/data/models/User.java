@@ -18,7 +18,7 @@ import java.util.*;
 @Table(name = "users")
 public class User extends BaseEntity implements UserDetails {
 
-    @Column (unique = true)
+    @Column(unique = true)
     private String username;
 
     @Column
@@ -28,7 +28,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Set<Role> authorities;
 
     @OneToOne(mappedBy = "user")
     private Chef chef;
@@ -47,30 +47,30 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+        List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Role role : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
         return authorities;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return false;
     }
 }

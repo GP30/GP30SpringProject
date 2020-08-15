@@ -4,8 +4,11 @@
 <body>
 <th:block th:include="~{_shared/header}"/>
 <main class="container">
+
+    <div class="container bg-blur">
     <h1 class="text-center">Users List</h1>
-    <hr class="hr-3"/>
+    </div>
+
     <table style="color:white" class="table bg-blur">
         <thead>
         <tr>
@@ -18,20 +21,22 @@
         <tbody id="users-table">
         <tr th:each="admin : ${admin_users}">
             <td th:text="${admin.username}"></td>
-            <td th:text="${admin.authorities}"></td>
+            <td th:each="admin_authority : ${admin.authorities}">
+                <span th:text="${admin_authority.authority}"></span>
+            </td>
             <td>
-                <form method="POST" th:action="@{/users/demote(user=${admin})}">
-                    <button type="submit" sec:authorize="hasAnyAuthority('ROOT')">Demote</button>
-                </form>
+                <a sec:authorize="hasAuthority('ROOT')" class="btn btn-danger"
+                   th:href="@{'/users/demote/'+${admin.id}}">Demote</a>
             </td>
         </tr>
         <tr th:each="simple_user : ${user_users}">
             <td th:text="${simple_user.username}"></td>
-            <td th:text="${simple_user.authorities}"></td>
+            <td th:each="user_authority : ${simple_user.authorities}">
+                <span th:text="${user_authority.authority}"></span>
+            </td>
             <td>
-                <form method="POST" th:action="@{/users/promote(user=${simple_user})}">
-                    <button type="submit" sec:authorize="hasAnyAuthority('ROOT')">Promote</button>
-                </form>
+                <a sec:authorize="hasAuthority('ROOT')" class="btn btn-success"
+                   th:href="@{'/users/promote/'+${simple_user.id}}">Promote</a>
             </td>
         </tr>
         </tbody>

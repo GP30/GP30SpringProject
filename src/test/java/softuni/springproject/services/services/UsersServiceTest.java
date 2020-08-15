@@ -25,7 +25,6 @@ class UsersServiceTest extends TestBase {
     @MockBean
     UsersRepository usersRepository;
 
-
     @Autowired
     UsersService service;
 
@@ -48,8 +47,11 @@ class UsersServiceTest extends TestBase {
     public void createChefForUser_whenUserExistsAndHasAChef_shouldThrowException() {
         User user = new User();
         user.setUsername("Georgi");
-        user.setChef(new Chef());
+        Chef chef = new Chef();
         String chefName = "ChefGeorgi";
+        chef.setName(chefName);
+        user.setChef(chef);
+
         Mockito.when(usersRepository.findByUsername(user.getUsername()))
                 .thenReturn(user);
 

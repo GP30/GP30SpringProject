@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header>
 
     <nav class="navbar bg-success navbar-expand-md navbar-background">
@@ -27,17 +31,20 @@
                 </th:block>
 
                 <th:block th:unless="${session.username == null}">
-
                     <th:block
                             th:unless="${session.chefName == null}">
                         <li class="nav-item mr-2">
                             <a class="nav-link text-white active h5" href="/recipes/recipebook">Recipebook</a>
                         </li>
                         <li class="nav-item mr-2">
+                            <a class="nav-link text-white active h5" href="/users/all-users" sec:authorize="hasAnyAuthority('ROOT', 'ADMIN')">All Users</a>
+                        </li>
+                        <li class="nav-item mr-2">
                             <a class="nav-link text-white active h5" href="/recipes/create">Create Recipe</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link text-white active h5" th:href="@{'/chefs/details/' + ${session.chefName}}">Chef</a>
+                            <a class="nav-link text-white active h5"
+                               th:href="@{'/chefs/details/' + ${session.chefName}}">Chef</a>
                         </li>
                         <li class="nav-item mr-2">
                             <a class="nav-link text-white active h5" href="/users/profile">Profile</a>
@@ -52,6 +59,10 @@
                     <th:block
                             th:if="${session.chefName == null}">
                         <li class="nav-item mr-2">
+                            <a class="nav-link text-white active h5" href="/users/all-users"
+                               sec:authorize="hasAnyAuthority('ROOT', 'ADMIN')">All Users</a>
+                        </li>
+                        <li class="nav-item mr-2">
                             <a class="nav-link text-white active h5" href="/recipes/create">Create Recipe</a>
                         </li>
                         <li class="nav-item mr-2">
@@ -59,7 +70,7 @@
                         </li>
                         <li class="nav-item mr-2">
                             <form th:action="@{/logout}" method="post">
-                                <button class="nav-link text-white active h5" type="submit">Logout</button>
+                                <button class="nav-link active h5" type="submit">Logout</button>
                             </form>
                         </li>
                     </th:block>

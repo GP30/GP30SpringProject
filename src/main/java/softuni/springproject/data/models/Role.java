@@ -1,9 +1,6 @@
 package softuni.springproject.data.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import softuni.springproject.data.models.base.BaseEntity;
 
@@ -16,11 +13,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity implements GrantedAuthority {
     private String authority;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 }
